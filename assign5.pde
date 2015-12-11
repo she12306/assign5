@@ -27,13 +27,13 @@ float enemyQuad [][] = new float [8][2];
 float lineCount;
 float QuadCount;
 
-//flames
+
 int timer;
 int current;
 PImage [] booms = new PImage [5];
 float boomsPlace [][] = new float [5][2]; 
 
-//place
+
 float treasureX;
 float treasureY;
 float fighterX;
@@ -42,19 +42,19 @@ float enemyFlyY;
 float [] shootX = new float [5];
 float [] shootY = new float [5];
 
-//speed
+
 float fighterSpeed;
 float enemySpeed;
 int shootSpeed;
 float addSpeed ;
 
-//input
+
 boolean upPressed = false;
 boolean downPressed = false;
 boolean leftPressed = false;
 boolean rightPressed = false;
 
-//shoot
+
 int bullet = 0;
 boolean [] shootLimit = new boolean[5];
 
@@ -90,13 +90,13 @@ void setup () {
   fighterX = width - 65 ;
   fighterY = height / 2 ; 
 
-  //speed
+
   fighterSpeed = 5 ;
   enemySpeed = 4 ;
   shootSpeed = 3 ;
   addSpeed =0.02;
   
-  //flames : Out of Canva
+
   timer = 0;
   current = 0;
   for ( int i = 0; i < boomsPlace.length; i ++){
@@ -104,12 +104,12 @@ void setup () {
     boomsPlace [i][1] = 1000;
   }
 
-  //shoot : No Bullets in the air
+
   for (int i =0; i < shootLimit.length ; i ++){
     shootLimit[i] = false;
   }
 
-  //enemy : draw LINE 
+
   lineCount = 0;  
   QuadCount = -60; 
   enemyFlyY = floor( random(80, 400) );   
@@ -137,7 +137,7 @@ void draw() {
     break;  
     case GAME_RUN:
     
-    //background_scrolling
+
       image (bg2, scrollRight, 0);
       image (bg1, scrollRight - width, 0);
       image (bg2, scrollRight - width * 2, 0); 
@@ -149,10 +149,10 @@ void draw() {
       fill(255);
       text(word,60,460);
       
-    //treasure_draw
+
       image (treasure, treasureX, treasureY);    
       
-    //treasure_avoid repeat
+
       if(treasureX >= (width - 65) - treasure.width 
         && treasureX <= (width - 65) + fighter.width 
         && treasureY >= (height / 2) - treasure.height
@@ -161,7 +161,7 @@ void draw() {
         treasureY = floor( random(50, height - 60) );
       }    
       
-    //Fighter_move
+
       image(fighter, fighterX, fighterY);
       
       if (upPressed && fighterY > 0) {
@@ -177,7 +177,7 @@ void draw() {
         fighterX += fighterSpeed ;
       }  
         
-    //Flames_burning
+
       image(booms[current], boomsPlace[current][0], boomsPlace[current][1]);
       
       timer ++;
@@ -188,7 +188,7 @@ void draw() {
         current = 0;
       }
       
-    //Flames_keep_burning   
+ 
       if(timer > 31){
         for (int i = 0; i < 5; i ++){
           boomsPlace [i][0] = 1000;
@@ -196,7 +196,7 @@ void draw() {
         }
       }   
       
-    //Shoot_bullet_fly
+
       for (int i = 0; i < 5; i ++){
         if (shootLimit[i] == true){
           image (shoot, shootX[i], shootY[i]);
@@ -256,8 +256,7 @@ void draw() {
           }
           
           if (enemyLine [enemyLine.length - 1][0] > width + 100 ) {        
-            //enemyFlyX = -100 ;
-            //enemyFlyX += enemySpeed ;
+            
             enemyFlyY = floor( random(30,240) );
             
             lineCount = 0;  
@@ -412,12 +411,12 @@ void draw() {
         break ;
       }
 
-     //HP_BAR_draw
+
       fill (#FF0000);
       rect (35, 15, hpBar, 30);
       image(hp, 28, 15); 
       
-      /* HP + 10 */         
+      
         if ( fighterX >= treasureX - fighter.width 
           && fighterX <= treasureX + treasure.width
           && fighterY >= treasureY - fighter.height
@@ -510,6 +509,7 @@ void mousePressed (){
     if( mouseButton == LEFT ){
       treasureX = floor( random(50,600) );
       treasureY = floor( random(50,420) );
+      n=0;
       
       enemyState = 0;      
       lineCount = 0;       
